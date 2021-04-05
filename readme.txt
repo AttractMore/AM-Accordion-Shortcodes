@@ -267,6 +267,12 @@ For bug reports or feature requests or if you'd like to contribute to the plugin
 3. The Accordion Item shortcode insertion dialog box
 
 == Changelog ==
+= 1.1.0 =
+* Removed code referencing TinyMCE
+
+= 1.0.0 =
+* Cloned from Phil Buchanan's coded
+
 = 2.4.2 =
 * FIXED: Each accordion group now respects its own settings when using multiple accordions on a single page
 

@@ -2,12 +2,12 @@
 /**
  * Plugin Name: AM Accordion Shortcodes
  * Description: Shortcodes for creating responsive accordion drop-downs. Clone from Phil Buchanan's code
- * Version: 1.0.0
- * Author: Phil Buchanan
+ * Version: 1.1.0
+ * Author: Phil Buchanan, Roger Knight
  * Author URI: http://philbuchanan.com
  */
 
-require_once('tinymce/tinymce.php');
+//require_once('tinymce/tinymce.php');
 
 // Make sure to not redeclare the class
 if (!class_exists('Accordion_Shortcodes')) :
@@ -17,9 +17,7 @@ class Accordion_Shortcodes {
 	/**
 	 * Current plugin version number
 	 */
-	private $plugin_version = '1.0.0';
-
-
+	private $plugin_version = '1.1.0';
 
 	/**
 	 * Should the accordion JavaScript file be loaded the on the current page
@@ -27,56 +25,40 @@ class Accordion_Shortcodes {
 	 */
 	private $load_script = false;
 
-
-
 	/**
 	 * Holds all the accordion shortcodes group settings
 	 */
 	private $script_data = array();
-
-
 
 	/**
 	 * Count of each accordion group on a page
 	 */
 	private $group_count = 0;
 
-
-
 	/**
 	 * Count for each accordion item within an accordion group
 	 */
 	private $item_count = 0;
-
-
 
 	/**
 	 * Holds the accordion group container HTML tag
 	 */
 	private $wrapper_tag = 'div';
 
-
-
 	/**
 	 * Holds the accordion item title HTML tag
 	 */
 	private $title_tag = 'h3';
-
-
 
 	/**
 	 * Holds the accordion item content container HTML tag
 	 */
 	private $content_tag = 'div';
 
-
-
 	/**
 	 * Whether to include a `<button>` tag wrapper on each title
 	 */
 	private $use_buttons = false;
-
-
 
 	/**
 	 * Class constructor
@@ -106,13 +88,11 @@ class Accordion_Shortcodes {
 			add_filter("plugin_action_links_$basename", array($this, 'add_documentation_link'));
 
 			// Add buttons to MCE editor
-			if (!defined('AS_TINYMCE') || AS_TINYMCE != false) {
-				$Accordion_Shortcode_Tinymce_Extensions = new Accordion_Shortcode_Tinymce_Extensions;
-			}
+//			if (!defined('AS_TINYMCE') || AS_TINYMCE != false) {
+//				$Accordion_Shortcode_Tinymce_Extensions = new Accordion_Shortcode_Tinymce_Extensions;
+//			}
 		}
 	}
-
-
 
 	/**
 	 * Get the compatibility mode prefix
@@ -123,8 +103,6 @@ class Accordion_Shortcodes {
 		return defined('AS_COMPATIBILITY') && AS_COMPATIBILITY ? 'as-' : '';
 	}
 
-
-
 	/**
 	 * Registers the JavaScript file
 	 * If SCRIPT_DEBUG is set to true in the config file, the un-minified
@@ -134,8 +112,6 @@ class Accordion_Shortcodes {
 		$min = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
 		wp_register_script('accordion-shortcodes-script', plugins_url('accordion' . $min . '.js', __FILE__), array('jquery'), $this->plugin_version, true);
 	}
-
-
 
 	/**
 	 * Prints the accordion JavaScript in the footer
@@ -152,8 +128,6 @@ class Accordion_Shortcodes {
 		wp_localize_script('accordion-shortcodes-script', 'accordionShortcodesSettings', $this->script_data);
 	}
 
-
-
 	/**
 	 * Checks if a value is boolean
 	 *
@@ -163,8 +137,6 @@ class Accordion_Shortcodes {
 	private function is_boolean($value) {
 		return filter_var($value, FILTER_VALIDATE_BOOLEAN);
 	}
-
-
 
 	/**
 	 * Check for valid HTML tag
@@ -185,8 +157,6 @@ class Accordion_Shortcodes {
 		}
 	}
 
-
-
 	/**
 	 * Check for valid scroll value
 	 * Scroll value must be either an int or bool
@@ -205,8 +175,6 @@ class Accordion_Shortcodes {
 		}
 	}
 
-
-
 	/**
 	 * Get's the ID for an accordion item
 	 *
@@ -222,8 +190,6 @@ class Accordion_Shortcodes {
 			'content' => $content_id
 		);
 	}
-
-
 
 	/**
 	 * Accordion group shortcode
@@ -290,8 +256,6 @@ class Accordion_Shortcodes {
 		);
 	}
 
-
-
 	/**
 	 * Accordion item shortcode
 	 */
@@ -331,8 +295,6 @@ class Accordion_Shortcodes {
 
 		<?php return ob_get_clean();
 	}
-
-
 
 	/**
 	 * Add documentation link on plugin page
